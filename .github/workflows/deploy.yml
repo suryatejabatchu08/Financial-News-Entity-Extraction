@@ -11,13 +11,13 @@ on:
   workflow_dispatch:
 
 env:
-  PROJECT_ID: gen-lang-client-0193288179
+  PROJECT_ID: nikitha-2025-1
   SERVICE_NAME: financial-ner-api
   REGION: us-central1
 
 jobs:
   deploy:
-    name: Deploy to Cloud Run 
+    name: Deploy to Cloud Run
     runs-on: ubuntu-latest
 
     steps:
@@ -34,7 +34,6 @@ jobs:
         with:
           project_id: ${{ env.PROJECT_ID }}
 
-      # ---------- NEW STEP ----------
       - name: Install Python dependencies (requirements.txt)
         run: |
           cd backend
@@ -42,9 +41,7 @@ jobs:
           source venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
-      # --------------------------------
 
-      # Deploy backend directory to Cloud Run
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ env.SERVICE_NAME }} \
